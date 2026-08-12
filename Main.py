@@ -1,5 +1,6 @@
 #imports
 from Room import room
+from Item import item
 
 #generate rooms
 gate = room("gate")
@@ -41,3 +42,30 @@ meeting_room.set_description("")
 head_office = room("")
 head_office.set_description("")
 
+    #Room links
+
+
+#item code
+vegemite = item("vegemite")
+vegemite.set_description("yummy vegemite great placeholder item")
+gate.set_item(vegemite)
+
+
+
+#start code
+
+bag = []
+current_cave = gate
+dead = False
+
+
+while dead == False: # game loop — runs until win or death
+    current_cave.get_details()
+    item = current_cave.get_item()
+    if item is not None:
+        item.describe()
+
+    command = input(">")
+
+    if command in ["north", "south", "east", "west"]:
+        current_cave = current_cave.move(command)
