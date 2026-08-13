@@ -4,11 +4,11 @@ from Item import item
 
 #generate rooms
 gate = room("gate")
-gate.set_description("")
+gate.set_description("A large gold gate closing off the manor")
 front_room = room("Front Room")
-front_room.set_description("")
+front_room.set_description("The room is dimly lit with red carpet and a large central donut shaped wooden desk")
 secrity_office = room("Secrity Office")
-secrity_office.set_description("")
+secrity_office.set_description("The secrity office is dark with all its light comming from the large video camera ")
 dinning_room = room("Dinning Room")
 dinning_room.set_description("")
 kitchen = room("Kitchen")
@@ -43,7 +43,29 @@ head_office = room("")
 head_office.set_description("")
 
     #Room links
-
+gate.link_cave(front_room, "north")
+front_room.link_cave(gate, "south")
+front_room.link_cave(secrity_office, "east")
+secrity_office.link_cave(front_room, "west")
+#.link_cave(, "")
+#.link_cave(, "")
+#.link_cave(, "")
+#.link_cave(, "")
+#.link_cave(, "")
+#.link_cave(, "")
+#.link_cave(, "")
+#.link_cave(, "")
+#.link_cave(, "")
+#.link_cave(, "")
+#.link_cave(, "")
+#.link_cave(, "")
+#.link_cave(, "")
+#.link_cave(, "")
+#.link_cave(, "")
+#.link_cave(, "")
+#.link_cave(, "")
+#.link_cave(, "")
+#.link_cave(, "")
 
 #item code
 vegemite = item("vegemite")
@@ -69,3 +91,8 @@ while dead == False: # game loop — runs until win or death
 
     if command in ["north", "south", "east", "west"]:
         current_cave = current_cave.move(command)
+    elif command == "take":
+        if item is not None:
+            print("You put the " + item.get_name() + " in your bag")
+            bag.append(item.get_name())
+            current_cave.set_item(None)
