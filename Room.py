@@ -19,7 +19,7 @@ class room :
 
      #[placeholder]
 
-     def link_cave(self, room_to_link, direction): 
+     def link_room(self, room_to_link, direction): 
         self.linked_rooms[direction] = room_to_link    
 
      def get_details(self):
@@ -28,7 +28,7 @@ class room :
         print(self.description)
         for direction in self.linked_rooms:
             room = self.linked_rooms[direction]
-            print("the " + room.get_name() + " is " + direction)
+            print("[The " + room.get_name() + " is " + direction + "]")
             
      def move(self, direction): 
 
@@ -41,4 +41,9 @@ class room :
             print("You slam your head into a wall") 
 
             return self 
-        
+     def set_item(self, new_item):   
+        self.item = new_item
+
+     def get_item(self):
+        return self.item
+    

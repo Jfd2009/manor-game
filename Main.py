@@ -1,14 +1,18 @@
 #imports
 from Room import room
 from Item import item
+from Task import task
+from Task import task_item
+from Task import task_math
+from NPC import npc
 
 #generate rooms
 gate = room("gate")
-gate.set_description("")
+gate.set_description("A large gold gate closing off the manor")
 front_room = room("Front Room")
-front_room.set_description("")
+front_room.set_description("The room is dimly lit with red carpet and a large central donut shaped wooden desk")
 secrity_office = room("Secrity Office")
-secrity_office.set_description("")
+secrity_office.set_description("The secrity office is dark with all its light comming from the large video camera ")
 dinning_room = room("Dinning Room")
 dinning_room.set_description("")
 kitchen = room("Kitchen")
@@ -43,7 +47,48 @@ head_office = room("")
 head_office.set_description("")
 
     #Room links
-
+gate.link_room(front_room, "north")
+front_room.link_room(gate, "south")
+front_room.link_room(secrity_office, "east")
+front_room.link_room(low_hall, "north")
+front_room.link_room(dinning_room, "west")
+secrity_office.link_room(front_room, "west")
+dinning_room.link_room(front_room, "east")
+dinning_room.link_room(kitchen, "west")
+low_hall.link_room(up_hall, "north")
+low_hall.link_room(storage, "east")
+low_hall.link_room(front_room, "south")
+low_hall.link_room(garden, "west")
+storage.link_room(low_hall, "west")
+garden.link_room(low_hall, "east")
+garden.link_room(g_up_hall, "north")
+garden.link_room(kitchen, "south")
+kitchen.link_room(dinning_room, "east")
+kitchen.link_room(garden, "north")
+kitchen.link_room(wine_celler, "west")
+wine_celler.link_room(kitchen, "east")
+up_hall.link_room(art_room, "north")
+up_hall.link_room(library, "east")
+up_hall.link_room(low_hall, "south")
+up_hall.link_room(g_low_hall, "west")
+library.link_room(up_hall, "west")
+library.link_room(office, "east")
+office.link_room(library, "west")
+g_low_hall.link_room(up_hall, "east")
+g_low_hall.link_room(g_up_hall, "west")
+g_up_hall.link_room(meeting_room, "north")
+g_up_hall.link_room(g_low_hall, "east")
+g_up_hall.link_room(garden, "south")
+g_up_hall.link_room(g_storage, "west")
+g_storage.link_room(g_up_hall, "east")
+meeting_room.link_room(g_up_hall, "south")
+meeting_room.link_room(stage_room, "east")
+stage_room.link_room(meeting_room, "west")
+stage_room.link_room(head_office, "north")
+stage_room.link_room(art_room, "east")
+head_office.link_room(stage_room, "south")
+art_room.link_room(stage_room, "west")
+art_room.link_room(up_hall, "south")
 
 #item code
 vegemite = item("vegemite")
@@ -55,17 +100,22 @@ gate.set_item(vegemite)
 #start code
 
 bag = []
-current_cave = gate
+current_room = gate
 dead = False
 
 
 while dead == False: # game loop — runs until win or death
-    current_cave.get_details()
-    item = current_cave.get_item()
+    current_room.get_details()
+    item = current_room.get_item()
     if item is not None:
         item.describe()
 
     command = input(">")
 
     if command in ["north", "south", "east", "west"]:
-        current_cave = current_cave.move(command)
+        current_room = current_room.move(command)
+    elif command == "take":
+        if item is not None:
+            print("You put the " + item.get_name() + " in your bag")
+            bag.append(item.get_name())
+            current_room.set_item(None)
