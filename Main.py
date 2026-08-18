@@ -1,6 +1,10 @@
 #imports
 from Room import room
 from Item import item
+from Task import task
+from Task import task_item
+from Task import task_math
+from NPC import npc
 
 #generate rooms
 gate = room("gate")
@@ -67,10 +71,9 @@ up_hall.link_room(art_room, "north")
 up_hall.link_room(library, "east")
 up_hall.link_room(low_hall, "south")
 up_hall.link_room(g_low_hall, "west")
-library.link_room
-
-office.link_room
-
+library.link_room(up_hall, "west")
+library.link_room(office, "east")
+office.link_room(library, "west")
 g_low_hall.link_room(up_hall, "east")
 g_low_hall.link_room(g_up_hall, "west")
 g_up_hall.link_room(meeting_room, "north")
@@ -78,11 +81,14 @@ g_up_hall.link_room(g_low_hall, "east")
 g_up_hall.link_room(garden, "south")
 g_up_hall.link_room(g_storage, "west")
 g_storage.link_room(g_up_hall, "east")
-#.link_room(, "")
-#.link_room(, "")
-#.link_room(, "")
-#.link_room(, "")
-
+meeting_room.link_room(g_up_hall, "south")
+meeting_room.link_room(stage_room, "east")
+stage_room.link_room(meeting_room, "west")
+stage_room.link_room(head_office, "north")
+stage_room.link_room(art_room, "east")
+head_office.link_room(stage_room, "south")
+art_room.link_room(stage_room, "west")
+art_room.link_room(up_hall, "south")
 
 #item code
 vegemite = item("vegemite")
