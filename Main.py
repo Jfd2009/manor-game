@@ -43,29 +43,46 @@ head_office = room("")
 head_office.set_description("")
 
     #Room links
-gate.link_cave(front_room, "north")
-front_room.link_cave(gate, "south")
-front_room.link_cave(secrity_office, "east")
-secrity_office.link_cave(front_room, "west")
-#.link_cave(, "")
-#.link_cave(, "")
-#.link_cave(, "")
-#.link_cave(, "")
-#.link_cave(, "")
-#.link_cave(, "")
-#.link_cave(, "")
-#.link_cave(, "")
-#.link_cave(, "")
-#.link_cave(, "")
-#.link_cave(, "")
-#.link_cave(, "")
-#.link_cave(, "")
-#.link_cave(, "")
-#.link_cave(, "")
-#.link_cave(, "")
-#.link_cave(, "")
-#.link_cave(, "")
-#.link_cave(, "")
+gate.link_room(front_room, "north")
+front_room.link_room(gate, "south")
+front_room.link_room(secrity_office, "east")
+front_room.link_room(low_hall, "north")
+front_room.link_room(dinning_room, "west")
+secrity_office.link_room(front_room, "west")
+dinning_room.link_room(front_room, "east")
+dinning_room.link_room(kitchen, "west")
+low_hall.link_room(up_hall, "north")
+low_hall.link_room(storage, "east")
+low_hall.link_room(front_room, "south")
+low_hall.link_room(garden, "west")
+storage.link_room(low_hall, "west")
+garden.link_room(low_hall, "east")
+garden.link_room(g_up_hall, "north")
+garden.link_room(kitchen, "south")
+kitchen.link_room(dinning_room, "east")
+kitchen.link_room(garden, "north")
+kitchen.link_room(wine_celler, "west")
+wine_celler.link_room(kitchen, "east")
+up_hall.link_room(art_room, "north")
+up_hall.link_room(library, "east")
+up_hall.link_room(low_hall, "south")
+up_hall.link_room(g_low_hall, "west")
+library.link_room
+
+office.link_room
+
+g_low_hall.link_room(up_hall, "east")
+g_low_hall.link_room(g_up_hall, "west")
+g_up_hall.link_room(meeting_room, "north")
+g_up_hall.link_room(g_low_hall, "east")
+g_up_hall.link_room(garden, "south")
+g_up_hall.link_room(g_storage, "west")
+g_storage.link_room(g_up_hall, "east")
+#.link_room(, "")
+#.link_room(, "")
+#.link_room(, "")
+#.link_room(, "")
+
 
 #item code
 vegemite = item("vegemite")
@@ -77,22 +94,22 @@ gate.set_item(vegemite)
 #start code
 
 bag = []
-current_cave = gate
+current_room = gate
 dead = False
 
 
 while dead == False: # game loop — runs until win or death
-    current_cave.get_details()
-    item = current_cave.get_item()
+    current_room.get_details()
+    item = current_room.get_item()
     if item is not None:
         item.describe()
 
     command = input(">")
 
     if command in ["north", "south", "east", "west"]:
-        current_cave = current_cave.move(command)
+        current_room = current_room.move(command)
     elif command == "take":
         if item is not None:
             print("You put the " + item.get_name() + " in your bag")
             bag.append(item.get_name())
-            current_cave.set_item(None)
+            current_room.set_item(None)
