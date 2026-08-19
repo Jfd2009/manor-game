@@ -23,8 +23,21 @@ class task_math(task) :
         import random
         list1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         list2 = [1, 2, 3, 4]
+        var1 = random.choice(list2)
         num1 = random.choice(list1)
         num2 = random.choice(list1)
+        if var1 == 1 :
+            print(num1, '+', num2, '=')
+            print(num1 + num2)
+        elif var1 == 2 :
+            print(num1, '-', num2, '=')
+            print(num1 - num2)
+        elif var1 == 3 :
+            print(num1, '/', num2, '=')
+            print(num1 / num2)
+        else:
+            print(num1, 'x', num2, '=')
+            print(num1 * num2)
 
 class task_item(task) :
     def __init__(self, task_name, task_description):  
