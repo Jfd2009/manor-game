@@ -18,13 +18,20 @@ class task :
 class task_math(task) :
     def __init__(self, task_name, task_description):  
         super().__init__(task_name, task_description) 
+     
+    def number(self, num1, num2, answer, input ):
+        import random
+        list1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        list2 = [1, 2, 3, 4]
+        num1 = random.choice(list1)
+        num2 = random.choice(list1)
 
 class task_item(task) :
     def __init__(self, task_name, task_description):  
         super().__init__(task_name, task_description) 
         self.required_item = None
 
-    def completing_task(self, input_item) :
+    def complete_task(self, input_item) :
 
         if input_item == self.required_item: 
 
@@ -33,7 +40,7 @@ class task_item(task) :
             return True 
 
         else: 
-            print("This is no the right item for " + self.name) 
+            print("This is not the right item for " + self.name) 
 
             return False   
 
